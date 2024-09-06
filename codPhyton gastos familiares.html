@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>codPhyton gastos familiares.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="generator" content="SynEdit HTML exporter" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #FFFFFF; }
+.cpp1-assembler { color: #0000FF; }
+.cpp1-character { color: #000000; }
+.cpp1-comment { color: #0078D7; font-style: italic; }
+.cpp1-float { color: #800080; }
+.cpp1-hexadecimal { color: #800080; }
+.cpp1-identifier { color: #000000; }
+.cpp1-illegalchar { color: #000000; }
+.cpp1-number { color: #800080; }
+.cpp1-octal { color: #800080; }
+.cpp1-preprocessor { color: #008000; }
+.cpp1-reservedword { color: #000000; font-weight: bold; }
+.cpp1-space { background-color: #FFFFFF; color: #000000; }
+.cpp1-string { color: #0000FF; font-weight: bold; }
+.cpp1-symbol { color: #FF0000; font-weight: bold; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<code><span style="font: 10pt Consolas;"><span class="cpp1-identifier">import csv
+from datetime import datetime
+
+</span><span class="cpp1-preprocessor"># Fun&ccedil;&atilde;o para exibir o menu principal
+</span><span class="cpp1-identifier">def exibir_menu</span><span class="cpp1-symbol">():
+</span><span class="cpp1-space">    print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;\n--- Gerenciador de Gastos Familiares ---&quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">    print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;1. Adicionar gasto&quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">    print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;2. Exibir gastos&quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">    print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;3. Sair&quot;</span><span class="cpp1-symbol">)
+
+</span><span class="cpp1-preprocessor"># Fun&ccedil;&atilde;o para adicionar um gasto
+</span><span class="cpp1-identifier">def adicionar_gasto</span><span class="cpp1-symbol">():
+</span><span class="cpp1-space">    nome </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> input</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Nome do membro da fam&iacute;lia (Pai, M&atilde;e, Juliana, Maria): &quot;</span><span class="cpp1-symbol">).</span><span class="cpp1-identifier">capitalize</span><span class="cpp1-symbol">()
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> nome </span><span class="cpp1-reservedword">not</span><span class="cpp1-space"> in </span><span class="cpp1-symbol">[</span><span class="cpp1-string">&quot;Pai&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> </span><span class="cpp1-string">&quot;M&atilde;e&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> </span><span class="cpp1-string">&quot;Juliana&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> </span><span class="cpp1-string">&quot;Maria&quot;</span><span class="cpp1-symbol">]:
+</span><span class="cpp1-space">        print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Nome inv&aacute;lido. Tente novamente.&quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">return
+</span><span class="cpp1-space">    
+    descricao </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> input</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Descri&ccedil;&atilde;o do gasto: &quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">    valor </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">float</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">input</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Valor do gasto: &quot;</span><span class="cpp1-symbol">))
+</span><span class="cpp1-space">    data </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> datetime</span><span class="cpp1-symbol">.</span><span class="cpp1-identifier">now</span><span class="cpp1-symbol">().</span><span class="cpp1-identifier">strftime</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span><span class="cpp1-symbol">)
+
+</span><span class="cpp1-space">    with open</span><span class="cpp1-symbol">(</span><span class="cpp1-character">'gastos.csv'</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> 'a'</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> newline</span><span class="cpp1-symbol">=</span><span class="cpp1-character">''</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> as file</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">        writer </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> csv</span><span class="cpp1-symbol">.</span><span class="cpp1-identifier">writer</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">file</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">        writer</span><span class="cpp1-symbol">.</span><span class="cpp1-identifier">writerow</span><span class="cpp1-symbol">([</span><span class="cpp1-identifier">nome</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> descricao</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> valor</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> data</span><span class="cpp1-symbol">])
+</span><span class="cpp1-space">    print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Gasto adicionado com sucesso!&quot;</span><span class="cpp1-symbol">)
+
+</span><span class="cpp1-preprocessor"># Fun&ccedil;&atilde;o para exibir todos os gastos
+</span><span class="cpp1-identifier">def exibir_gastos</span><span class="cpp1-symbol">():
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">try</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">        with open</span><span class="cpp1-symbol">(</span><span class="cpp1-character">'gastos.csv'</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> 'r'</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> as file</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">            reader </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> csv</span><span class="cpp1-symbol">.</span><span class="cpp1-identifier">reader</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">file</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">            print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;\n--- Gastos Registrados ---&quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">for</span><span class="cpp1-space"> row in reader</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                print</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">f</span><span class="cpp1-string">&quot;Membro: {row[0]}, Descri&ccedil;&atilde;o: {row[1]}, Valor: R${row[2]:.2f}, Data: {row[3]}&quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">    except FileNotFoundError</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">        print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Nenhum gasto registrado ainda.&quot;</span><span class="cpp1-symbol">)
+
+</span><span class="cpp1-preprocessor"># Fun&ccedil;&atilde;o principal para executar o programa
+</span><span class="cpp1-identifier">def main</span><span class="cpp1-symbol">():
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> True</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">        exibir_menu</span><span class="cpp1-symbol">()
+</span><span class="cpp1-space">        escolha </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> input</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Escolha uma op&ccedil;&atilde;o: &quot;</span><span class="cpp1-symbol">)
+
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> escolha </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> '1'</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">            adicionar_gasto</span><span class="cpp1-symbol">()
+</span><span class="cpp1-space">        elif escolha </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> '2'</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">            exibir_gastos</span><span class="cpp1-symbol">()
+</span><span class="cpp1-space">        elif escolha </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> '3'</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">            print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Saindo do programa...&quot;</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">break
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">else</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">            print</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Op&ccedil;&atilde;o inv&aacute;lida. Tente novamente.&quot;</span><span class="cpp1-symbol">)
+
+</span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> __name__ </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> </span><span class="cpp1-string">&quot;__main__&quot;</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">    main</span><span class="cpp1-symbol">()
+
+</span></span>
+</code></pre>
+</body>
+</html>
